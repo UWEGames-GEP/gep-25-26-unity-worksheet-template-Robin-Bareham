@@ -4,7 +4,8 @@ public class GameManager : MonoBehaviour
 {
     public enum GameState { GAMEPLAY,PAUSE}
     public GameState state = GameState.GAMEPLAY;
-    public bool hasChangedState = false;
+    public GameObject pause_screen;
+    private bool hasChangedState = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,21 +15,25 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (state == GameState.GAMEPLAY)
+        switch (state) 
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                hasChangedState = true;
-                state = GameState.PAUSE;
-            }
-        }
-        else if (state == GameState.PAUSE) 
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                hasChangedState = true;
-                state = GameState.GAMEPLAY;
-            }
+            case GameState.GAMEPLAY:
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    hasChangedState = true;
+                    state = GameState.PAUSE;
+                    pause_screen.SetActive(true);
+
+                }
+                break;
+            case GameState.PAUSE:
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    hasChangedState = true;
+                    state = GameState.GAMEPLAY;
+                    pause_screen.SetActive(false);
+                }
+                break;
         }
     }
 
