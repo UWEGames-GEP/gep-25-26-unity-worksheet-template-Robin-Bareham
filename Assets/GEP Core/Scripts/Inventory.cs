@@ -4,9 +4,11 @@ using System.Collections.Generic;
 public class Inventory : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
-    public List<string> items = new List<string>();
     public GameManager gameManager;
+
+    [SerializeField]
+    private List<string> items = new List<string>();
+    
 
     void Start()
     {
@@ -20,20 +22,52 @@ public class Inventory : MonoBehaviour
         {
             addItem("Apple");
         }
-        if(Input.GetKeyDown(KeyCode.Alpha2) && gameManager.getState() == GameManager.GameState.GAMEPLAY) 
+        if (Input.GetKeyDown(KeyCode.Alpha2) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
+        {
+            addItem("Banana");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
+        {
+            addItem("Pair");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
+        {
+            addItem("Melon");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5) && gameManager.getState() == GameManager.GameState.GAMEPLAY) 
         {
             removeItem("Apple");
         }
+        if (Input.GetKeyDown(KeyCode.Alpha6) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
+        {
+            removeItem("Banana");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
+        {
+            removeItem("Pair");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
+        {
+            removeItem("Melon");
+
+        }
     }
 
-    void addItem(string item_name)
+    public void addItem(string item_name)
     {
         items.Add(item_name);
+        sortList();
     }
 
-    void removeItem(string item_name) 
+    public void removeItem(string item_name) 
     {
         items.Remove(item_name);
+    }
+
+    private void sortList() 
+    {
+        items.Sort();
     }
 
 }
