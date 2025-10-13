@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public enum GameState { GAMEPLAY,PAUSE}
-    public GameState state = GameState.GAMEPLAY;
     public GameObject pause_screen;
+    public enum GameState { GAMEPLAY,PAUSE}
+    private GameState state = GameState.GAMEPLAY;
     private bool hasChangedState = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -52,4 +52,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+  public GameState getState() { return state; }
 }
