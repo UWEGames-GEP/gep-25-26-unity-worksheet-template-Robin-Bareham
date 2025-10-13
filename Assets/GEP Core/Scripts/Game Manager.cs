@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,6 +35,14 @@ public class GameManager : MonoBehaviour
                     state = GameState.GAMEPLAY;
                     pause_screen.SetActive(false);
                 }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    print("MOUSE DOWN");
+                }
+                else if (Input.GetMouseButtonDown(1)) 
+                {
+                    print("MOUSE UP");
+                }
                 break;
         }
     }
@@ -52,6 +62,9 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
-  public GameState getState() { return state; }
+    private void OnMouseDown()
+    {
+        print("MOUSEDOWN");
+    }
+    public GameState getState() { return state; }
 }

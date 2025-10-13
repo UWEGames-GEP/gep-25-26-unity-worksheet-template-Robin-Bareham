@@ -15,6 +15,7 @@ namespace StarterAssets
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
+        public GameManager gameManager;
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
 
@@ -130,6 +131,7 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+            gameManager = FindAnyObjectByType<GameManager>();
         }
 
         private void Start()
@@ -281,7 +283,7 @@ namespace StarterAssets
 
         private void JumpAndGravity()
         {
-            if (Grounded)
+            if (Grounded && gameManager.getState() == GameManager.GameState.GAMEPLAY)
             {
                 // reset the fall timeout timer
                 _fallTimeoutDelta = FallTimeout;
