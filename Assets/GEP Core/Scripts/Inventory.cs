@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeField]
     private List<string> items = new List<string>();
+    private List<GameObject> game_objects_list = new List<GameObject>();
     
 
     void Start()
@@ -22,23 +23,66 @@ public class Inventory : MonoBehaviour
         /*if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
         {
             addItem("Apple");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5) && gameManager.getState() == GameManager.GameState.GAMEPLAY) 
-        {
-            removeItem("Apple");
         }*/
+        if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.getState() == GameManager.GameState.GAMEPLAY) 
+        {
+            if(getItem() != "\0") 
+            {
+                string item_being_removed = getItem();
+                int item_location = getItemLocation(item_being_removed);
+
+                //Set location to be in front of player
+                //game_objects_list[item_location].gameObject.transform.position = 
+                game_objects_list[item_location].gameObject.SetActive(true);
+                game_objects_list.Remove(game_objects_list[item_location]);
+                removeItem(item_being_removed);
+            }
+            
+        }
 
     }
 
     public void addItem(string item_name)
     {
         items.Add(item_name);
-        sortList();
+        //sortList();
     }
 
     public void removeItem(string item_name) 
     {
         items.Remove(item_name);
+    }
+
+    public string getItem()
+    {
+        if(items.Count != 0)
+        {
+            return items[0];
+        }
+        else
+        {
+            return "\0";
+        }
+    }
+
+    private int getItemLocation(string name) 
+    {
+        if (items.Count != 0)
+        {
+            for(int i = 0; i < items.Count; i++) 
+            {
+                if (items[i] == name) 
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        else 
+        {
+            return -1;
+        }
+ 
     }
 
     private void sortList() 
@@ -48,10 +92,12 @@ public class Inventory : MonoBehaviour
 
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.transform.CompareTag("Collectable")) 
+        if (hit.transform.CompareTag("Collectable") && hit.gameObject.activeSelf == true) 
         {
+            game_objects_list.Add(hit.gameObject);
             items.Add(hit.gameObject.name);
-            Destroy(hit.gameObject);
+            hit.gameObject.SetActive(false);
+            //Destroy(hit.gameObject);
         }
     }
 
