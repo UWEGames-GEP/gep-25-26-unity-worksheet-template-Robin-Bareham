@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditor.Search;
 
 public class Inventory : MonoBehaviour
 {
@@ -18,40 +19,15 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
+        /*if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
         {
             addItem("Apple");
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
-        {
-            addItem("Banana");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
-        {
-            addItem("Pair");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
-        {
-            addItem("Melon");
-        }
-
         if (Input.GetKeyDown(KeyCode.Alpha5) && gameManager.getState() == GameManager.GameState.GAMEPLAY) 
         {
             removeItem("Apple");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
-        {
-            removeItem("Banana");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha7) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
-        {
-            removeItem("Pair");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha8) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
-        {
-            removeItem("Melon");
+        }*/
 
-        }
     }
 
     public void addItem(string item_name)
@@ -68,6 +44,15 @@ public class Inventory : MonoBehaviour
     private void sortList() 
     {
         items.Sort();
+    }
+
+    public void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.transform.CompareTag("Collectable")) 
+        {
+            items.Add(hit.gameObject.name);
+            Destroy(hit.gameObject);
+        }
     }
 
 }
