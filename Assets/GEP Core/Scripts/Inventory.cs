@@ -6,7 +6,7 @@ public class Inventory : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameManager gameManager;
-
+    public GameObject sorting_inventory_script;
 
     [SerializeField]
     private List<string> items = new List<string>();
@@ -16,6 +16,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         gameManager = FindAnyObjectByType<GameManager>();
+        
     }
 
     // Update is called once per frame
@@ -49,6 +50,7 @@ public class Inventory : MonoBehaviour
         game_objects_list[item_location].gameObject.SetActive(true);
         game_objects_list.Remove(game_objects_list[item_location]);
         items.Remove(item_name);
+        sorting_inventory_script.GetComponent<SortingInventory>().activate_buttons(items);
     }
 
     public string getItem()
@@ -62,6 +64,8 @@ public class Inventory : MonoBehaviour
             return "\0";
         }
     }
+
+    public List<string> getList() { return items; }
 
     private int getItemLocation(string name) 
     {
@@ -83,10 +87,6 @@ public class Inventory : MonoBehaviour
  
     }
 
-    private void sortList() 
-    {
-        items.Sort();
-    }
 
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {

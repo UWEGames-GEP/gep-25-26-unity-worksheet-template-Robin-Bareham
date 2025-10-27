@@ -669,7 +669,7 @@ GameObject:
   - component: {fileID: 763552821}
   m_Layer: 5
   m_Name: apple
-  m_TagString: Untagged
+  m_TagString: invBtn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -818,6 +818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pause_screen: {fileID: 1759905643}
   inventory_screen: {fileID: 1024905206}
+  player_inventory: {fileID: 1196567613}
 --- !u!4 &768689237
 Transform:
   m_ObjectHideFlags: 0
@@ -983,7 +984,7 @@ GameObject:
   - component: {fileID: 826261192}
   m_Layer: 5
   m_Name: cherries
-  m_TagString: Untagged
+  m_TagString: invBtn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1309,6 +1310,7 @@ GameObject:
   - component: {fileID: 1024905209}
   - component: {fileID: 1024905208}
   - component: {fileID: 1024905207}
+  - component: {fileID: 1024905211}
   m_Layer: 5
   m_Name: ' Inventory Screen'
   m_TagString: Untagged
@@ -1404,6 +1406,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1024905211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024905206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 971c8a709ae681548a2f5e168e53eac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons_list: []
 --- !u!1001 &1068353130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2193,7 +2208,7 @@ GameObject:
   - component: {fileID: 1596338068}
   m_Layer: 5
   m_Name: banana
-  m_TagString: Untagged
+  m_TagString: invBtn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2588,7 +2603,7 @@ GameObject:
   - component: {fileID: 2033012233}
   m_Layer: 5
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: invBtn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

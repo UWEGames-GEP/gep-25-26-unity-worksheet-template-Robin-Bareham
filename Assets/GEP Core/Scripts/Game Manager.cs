@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject pause_screen;
     public GameObject inventory_screen;
+    public GameObject player_inventory;
     public enum GameState { GAMEPLAY,PAUSE,INVENTORY}
     private GameState state = GameState.GAMEPLAY;
     private bool hasChangedState = false;
@@ -32,9 +33,11 @@ public class GameManager : MonoBehaviour
                 {
                     hasChangedState = true;
                     state = GameState.INVENTORY;
+                    inventory_screen.GetComponent<SortingInventory>().activate_buttons(player_inventory.GetComponent<Inventory>().getList());
                     inventory_screen.SetActive(true);
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
+                    
                 }
                 break;
             case GameState.PAUSE:
@@ -83,12 +86,6 @@ public class GameManager : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        switch (state)
-        {
-            case GameState.INVENTORY:
-                
-                break;
-        }
         print("MOUSEDOWN");
     }
     public GameState getState() { return state; }
