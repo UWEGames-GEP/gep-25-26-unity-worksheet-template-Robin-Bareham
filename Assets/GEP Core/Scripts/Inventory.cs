@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameManager gameManager;
 
+
     [SerializeField]
     private List<string> items = new List<string>();
     private List<GameObject> game_objects_list = new List<GameObject>();
@@ -24,17 +25,11 @@ public class Inventory : MonoBehaviour
         {
             addItem("Apple");
         }*/
-        if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.getState() == GameManager.GameState.GAMEPLAY) 
+        if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.getState() == GameManager.GameState.INVENTORY) 
         {
             if(getItem() != "\0") 
             {
                 string item_being_removed = getItem();
-                int item_location = getItemLocation(item_being_removed);
-
-                //Set location to be in front of player
-                //game_objects_list[item_location].gameObject.transform.position = 
-                game_objects_list[item_location].gameObject.SetActive(true);
-                game_objects_list.Remove(game_objects_list[item_location]);
                 removeItem(item_being_removed);
             }
             
@@ -48,8 +43,11 @@ public class Inventory : MonoBehaviour
         //sortList();
     }
 
-    public void removeItem(string item_name) 
+    public void removeItem(string item_name)
     {
+        int item_location = getItemLocation(item_name);
+        game_objects_list[item_location].gameObject.SetActive(true);
+        game_objects_list.Remove(game_objects_list[item_location]);
         items.Remove(item_name);
     }
 

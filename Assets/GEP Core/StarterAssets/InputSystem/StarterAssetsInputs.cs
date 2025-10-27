@@ -7,7 +7,7 @@ namespace StarterAssets
 {
 	public class StarterAssetsInputs : MonoBehaviour
 	{
-		[Header("Character Input Values")]
+        [Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
 		public bool jump;
@@ -67,13 +67,14 @@ namespace StarterAssets
 		}
 
 		private void OnApplicationFocus(bool hasFocus)
-		{
+		{			
 			SetCursorState(cursorLocked);
 		}
 
 		private void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+
 		}
 	}
 	

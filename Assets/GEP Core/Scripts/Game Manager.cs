@@ -5,7 +5,8 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public GameObject pause_screen;
-    public enum GameState { GAMEPLAY,PAUSE}
+    public GameObject inventory_screen;
+    public enum GameState { GAMEPLAY,PAUSE,INVENTORY}
     private GameState state = GameState.GAMEPLAY;
     private bool hasChangedState = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,7 +26,15 @@ public class GameManager : MonoBehaviour
                     hasChangedState = true;
                     state = GameState.PAUSE;
                     pause_screen.SetActive(true);
-
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                if (Input.GetKeyDown(KeyCode.I))
+                {
+                    hasChangedState = true;
+                    state = GameState.INVENTORY;
+                    inventory_screen.SetActive(true);
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
                 }
                 break;
             case GameState.PAUSE:
@@ -34,6 +43,7 @@ public class GameManager : MonoBehaviour
                     hasChangedState = true;
                     state = GameState.GAMEPLAY;
                     pause_screen.SetActive(false);
+                    Cursor.lockState = CursorLockMode.Locked;
                 }
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -42,6 +52,15 @@ public class GameManager : MonoBehaviour
                 else if (Input.GetMouseButtonDown(1)) 
                 {
                     print("MOUSE UP");
+                }
+                break;
+            case GameState.INVENTORY:
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    hasChangedState = true;
+                    state = GameState.GAMEPLAY;
+                    inventory_screen.SetActive(false);
+                    Cursor.lockState = CursorLockMode.Locked;
                 }
                 break;
         }
@@ -56,7 +75,7 @@ public class GameManager : MonoBehaviour
             {
                 Time.timeScale = 1.0f;
             }
-            if(state == GameState.PAUSE)
+            if(state == GameState.PAUSE || state == GameState.INVENTORY)
             {
                 Time.timeScale = 0.0f;
             }
@@ -64,6 +83,12 @@ public class GameManager : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        switch (state)
+        {
+            case GameState.INVENTORY:
+                
+                break;
+        }
         print("MOUSEDOWN");
     }
     public GameState getState() { return state; }
