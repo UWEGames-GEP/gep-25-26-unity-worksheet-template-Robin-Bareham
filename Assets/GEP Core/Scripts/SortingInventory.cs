@@ -7,17 +7,12 @@ using UnityEngine.UI;
 public class SortingInventory : MonoBehaviour
 {
     public List<GameObject> buttons_list = new List<GameObject>();
+    private List<GameObject> panel_list = new List<GameObject>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        GameObject[] btn = GameObject.FindGameObjectsWithTag("invBtn");
-
-        for (int i = 0; i < btn.Length; i++)
-        {
-            buttons_list.Add(btn[i]);
-            buttons_list[i].SetActive(false);
-        }
+        activateBtnList();
 
     }
 
@@ -25,6 +20,22 @@ public class SortingInventory : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void activateBtnList() 
+    {
+        GameObject[] btn = GameObject.FindGameObjectsWithTag("invBtn");
+        GameObject[] pannel_temp = GameObject.FindGameObjectsWithTag("pannel");
+
+        for (int i = 0; i < btn.Length; i++)
+        {
+            buttons_list.Add(btn[i]);
+            buttons_list[i].SetActive(false);
+        }
+        for (int i = 0; i < pannel_temp.Length; i++) 
+        {
+            panel_list.Add(pannel_temp[i]);
+        }
     }
 
     public void activate_buttons(List<string> collected_list) 
@@ -51,5 +62,34 @@ public class SortingInventory : MonoBehaviour
                 }
             }
         }
+        sortBtnList(); 
+    }
+
+    private void sortBtnList() 
+    {
+
+        //Reset first button position.
+        int current_panel = 0;
+        int max_panels = panel_list.Count;
+        //Checks if there is an active button.
+        for (int i =0; i < buttons_list.Count; i++) 
+        {
+            if (buttons_list[i].activeInHierarchy == true) 
+            {
+                //Set its position to the first free pannel
+
+                //Get Panel position
+                UnityEngine.Vector3 panel_pos = panel_list[current_panel].transform.position;
+                //Set active button to position
+                buttons_list[i].transform.position = panel_pos;
+                current_panel++;
+                //Change the new starting position for the next possible button
+            }
+        }
+
     }
 }
+
+// Lunge hits balls and launches
+// Launchign npcs
+// Destroying NPCS

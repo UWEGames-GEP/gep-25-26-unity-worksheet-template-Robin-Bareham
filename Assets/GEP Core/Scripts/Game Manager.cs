@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         state = GameState.GAMEPLAY;
+        inventory_screen.GetComponent<SortingInventory>().activateBtnList();
     }
 
     // Update is called once per frame
@@ -33,8 +34,8 @@ public class GameManager : MonoBehaviour
                 {
                     hasChangedState = true;
                     state = GameState.INVENTORY;
-                    inventory_screen.GetComponent<SortingInventory>().activate_buttons(player_inventory.GetComponent<Inventory>().getList());
                     inventory_screen.SetActive(true);
+                    inventory_screen.GetComponent<SortingInventory>().activate_buttons(player_inventory.GetComponent<Inventory>().getList());
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     

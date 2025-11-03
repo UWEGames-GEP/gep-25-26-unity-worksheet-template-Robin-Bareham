@@ -25,7 +25,8 @@ public class Inventory : MonoBehaviour
         /*if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
         {
             addItem("Apple");
-        }*/
+        }
+        // Removes items at position 0
         if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.getState() == GameManager.GameState.INVENTORY) 
         {
             if(getItem() != "\0") 
@@ -34,7 +35,7 @@ public class Inventory : MonoBehaviour
                 removeItem(item_being_removed);
             }
             
-        }
+        }*/
 
     }
 
@@ -90,6 +91,7 @@ public class Inventory : MonoBehaviour
 
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        //If the player collides with an active object with the tag collectable.
         if (hit.transform.CompareTag("Collectable") && hit.gameObject.activeSelf == true) 
         {
             game_objects_list.Add(hit.gameObject);
