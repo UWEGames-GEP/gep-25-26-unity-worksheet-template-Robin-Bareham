@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         state = GameState.GAMEPLAY;
-        inventory_screen.GetComponent<SortingInventory>().activateBtnList();
     }
 
     // Update is called once per frame

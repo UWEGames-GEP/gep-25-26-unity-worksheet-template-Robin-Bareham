@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor.Search;
+using UnityEngine.EventSystems;
 
 public class Inventory : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         gameManager = FindAnyObjectByType<GameManager>();
-        
     }
 
     // Update is called once per frame
@@ -42,15 +42,24 @@ public class Inventory : MonoBehaviour
     public void addItem(string item_name)
     {
         items.Add(item_name);
-        //sortList();
     }
 
     public void removeItem(string item_name)
     {
+        //Gets Item location in the list
         int item_location = getItemLocation(item_name);
+        //Sets the in-game equivilant to active and removes from gameObejctList
         game_objects_list[item_location].gameObject.SetActive(true);
         game_objects_list.Remove(game_objects_list[item_location]);
+        //Adjust count attached to button to corrolate to the amound of items in the inventory list
+        int amount = getAmountOfItems(item_name);
+        //Removes item from inventory list
         items.Remove(item_name);
+
+        
+        // [Goes to inventory object and gets the text n adjusts it.]
+
+        //resorts buttons and deactivates the one clicked.
         sorting_inventory_script.GetComponent<SortingInventory>().activate_buttons(items);
     }
 
@@ -86,6 +95,27 @@ public class Inventory : MonoBehaviour
             return -1;
         }
  
+    }
+
+    private int getAmountOfItems(string name) 
+    {
+        int item_count = 0;
+        if (items.Count != 0)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i] == name)
+                {
+                    item_count++;
+                }
+            }
+            return item_count;
+        }
+        else
+        {
+            //If no items in the list
+            return 0;
+        }
     }
 
 

@@ -6,23 +6,11 @@ using UnityEngine.UI;
 
 public class SortingInventory : MonoBehaviour
 {
-    public List<GameObject> buttons_list = new List<GameObject>();
+    private List<GameObject> buttons_list = new List<GameObject>();
     private List<GameObject> panel_list = new List<GameObject>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
-    {
-        activateBtnList();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void activateBtnList() 
     {
         GameObject[] btn = GameObject.FindGameObjectsWithTag("invBtn");
         GameObject[] pannel_temp = GameObject.FindGameObjectsWithTag("pannel");
@@ -32,10 +20,16 @@ public class SortingInventory : MonoBehaviour
             buttons_list.Add(btn[i]);
             buttons_list[i].SetActive(false);
         }
-        for (int i = 0; i < pannel_temp.Length; i++) 
+        for (int i = 0; i < pannel_temp.Length; i++)
         {
             panel_list.Add(pannel_temp[i]);
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
     public void activate_buttons(List<string> collected_list) 
@@ -89,7 +83,3 @@ public class SortingInventory : MonoBehaviour
 
     }
 }
-
-// Lunge hits balls and launches
-// Launchign npcs
-// Destroying NPCS
