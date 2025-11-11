@@ -10,7 +10,9 @@ public class Inventory : MonoBehaviour
     public GameObject sorting_inventory_script;
 
     [SerializeField]
+    //List of items that have been collected in the inventory
     private List<string> items = new List<string>();
+    //List of items that are avalible in the overworld.
     private List<GameObject> game_objects_list = new List<GameObject>();
     
 
@@ -52,13 +54,9 @@ public class Inventory : MonoBehaviour
         game_objects_list[item_location].gameObject.SetActive(true);
         game_objects_list.Remove(game_objects_list[item_location]);
         //Adjust count attached to button to corrolate to the amound of items in the inventory list
-        int amount = getAmountOfItems(item_name);
+        int amount = getAmountOfItems(item_name); //Gets the amount of that item in the inventory list
         //Removes item from inventory list
         items.Remove(item_name);
-
-        
-        // [Goes to inventory object and gets the text n adjusts it.]
-
         //resorts buttons and deactivates the one clicked.
         sorting_inventory_script.GetComponent<SortingInventory>().activate_buttons(items);
     }

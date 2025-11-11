@@ -39,22 +39,32 @@ public class SortingInventory : MonoBehaviour
         {
           buttons_list[i].SetActive(false);
         }
-        
+        //Goes through all avalible buttons
         for (int i = 0; i < buttons_list.Count; i++) 
         {
+            int object_count = 0;
             bool already_activated = false;
+            //Goes through the list of collected items
             for (int j = 0; j < collected_list.Count; j++) 
             {
+                
+                //if a button name is in the collected items
                 if (buttons_list[i].name == collected_list[j]) 
                 {
+                    //It sets it to active
                     buttons_list[i].SetActive(true);
-                    already_activated = true;
+                    already_activated = true; //Avoids hiding it when going through the rest of the list.
+                    object_count++;
+                    
                 }
+                //If there is no instance of the button and it hasn't been set to active in a different part.
                 else if (!already_activated)
                 {
                     buttons_list[i].SetActive(false);
                 }
             }
+            buttons_list[i].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = object_count.ToString();
+            //buttons_list[i].GetComponentInChildren<Text>().text = object_count.ToString();
         }
         sortBtnList(); 
     }
@@ -82,4 +92,6 @@ public class SortingInventory : MonoBehaviour
         }
 
     }
+
+
 }
