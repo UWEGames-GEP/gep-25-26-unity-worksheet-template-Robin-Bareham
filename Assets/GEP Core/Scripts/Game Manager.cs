@@ -18,56 +18,7 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        switch (state) 
-        {
-            case GameState.GAMEPLAY:
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    hasChangedState = true;
-                    state = GameState.PAUSE;
-                    pause_screen.SetActive(true);
-                    Cursor.lockState = CursorLockMode.None;
-                }
-                if (Input.GetKeyDown(KeyCode.I))
-                {
-                    hasChangedState = true;
-                    state = GameState.INVENTORY;
-                    inventory_screen.SetActive(true);
-                    inventory_screen.GetComponent<SortingInventory>().activate_buttons(player_inventory.GetComponent<Inventory>().getList());
-                    Cursor.visible = true;
-                    Cursor.lockState = CursorLockMode.None;
-                    
-                }
-                break;
-            case GameState.PAUSE:
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    hasChangedState = true;
-                    state = GameState.GAMEPLAY;
-                    pause_screen.SetActive(false);
-                    Cursor.lockState = CursorLockMode.Locked;
-                }
-                if (Input.GetMouseButtonDown(0))
-                {
-                    print("MOUSE DOWN");
-                }
-                else if (Input.GetMouseButtonDown(1)) 
-                {
-                    print("MOUSE UP");
-                }
-                break;
-            case GameState.INVENTORY:
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    hasChangedState = true;
-                    state = GameState.GAMEPLAY;
-                    inventory_screen.SetActive(false);
-                    Cursor.lockState = CursorLockMode.Locked;
-                }
-                break;
-        }
-    }
+    {    }
 
     private void LateUpdate()
     {
@@ -89,4 +40,49 @@ public class GameManager : MonoBehaviour
         print("MOUSEDOWN");
     }
     public GameState getState() { return state; }
+
+    public void inventoryInput()
+    {
+        switch (state) 
+        {
+            case GameState.GAMEPLAY:
+                hasChangedState = true;
+                state = GameState.INVENTORY;
+                inventory_screen.SetActive(true);
+                inventory_screen.GetComponent<SortingInventory>().activate_buttons(player_inventory.GetComponent<Inventory>().getList());
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                break;
+
+        }
+    }
+    public void pauseInput()
+    {
+
+        switch (state)
+        {
+            case GameState.GAMEPLAY:
+                    hasChangedState = true;
+                    state = GameState.PAUSE;
+                    pause_screen.SetActive(true);
+                    Cursor.lockState = CursorLockMode.None;
+                break;
+            case GameState.PAUSE:
+                    hasChangedState = true;
+                    state = GameState.GAMEPLAY;
+                    pause_screen.SetActive(false);
+                    Cursor.lockState = CursorLockMode.Locked;
+                break;
+            case GameState.INVENTORY:
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    hasChangedState = true;
+                    state = GameState.GAMEPLAY;
+                    inventory_screen.SetActive(false);
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+                break;
+        }
+
+    }
 }
