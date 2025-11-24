@@ -24,20 +24,6 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.getState() == GameManager.GameState.GAMEPLAY)
-        {
-            addItem("Apple");
-        }
-        // Removes items at position 0
-        if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.getState() == GameManager.GameState.INVENTORY) 
-        {
-            if(getItem() != "\0") 
-            {
-                string item_being_removed = getItem();
-                removeItem(item_being_removed);
-            }
-            
-        }*/
 
     }
 
@@ -52,6 +38,9 @@ public class Inventory : MonoBehaviour
         int item_location = getItemLocation(item_name);
         //Sets the in-game equivilant to active and removes from gameObejctList
         game_objects_list[item_location].gameObject.SetActive(true);
+        //SET GAMEOBJECT LOCATION IN FRONT OF PLAYER
+        relocateItem(game_objects_list[item_location]);
+        // Removes object as collected
         game_objects_list.Remove(game_objects_list[item_location]);
         //Adjust count attached to button to corrolate to the amound of items in the inventory list
         int amount = getAmountOfItems(item_name); //Gets the amount of that item in the inventory list
@@ -61,16 +50,23 @@ public class Inventory : MonoBehaviour
         sorting_inventory_script.GetComponent<SortingInventory>().activate_buttons(items);
     }
 
-    public string getItem()
+   public void relocateItem(GameObject item) 
     {
-        if(items.Count != 0)
-        {
-            return items[0];
-        }
-        else
-        {
-            return "\0";
-        }
+        Vector3 currentPos = transform.position;
+        Vector3 forward = transform.forward;
+
+        Debug.Log("POS: " + currentPos);
+        Debug.Log("FORWARD: " + forward);
+
+        Vector3 newPos = currentPos + (forward*2);
+        newPos += new Vector3(0, 1, 0);
+        Debug.Log("NewPOS: " + newPos);
+
+        Quaternion currentRotation = transform.rotation;
+        Quaternion newRotation = currentRotation * Quaternion.Euler(0, 0, 180);
+
+        //item.transform.rotation = currentRotation;
+        item.transform.position = newPos;
     }
 
     public List<string> getList() { return items; }

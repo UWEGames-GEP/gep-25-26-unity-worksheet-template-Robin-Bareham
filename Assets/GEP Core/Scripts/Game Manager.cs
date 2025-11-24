@@ -46,10 +46,13 @@ public class GameManager : MonoBehaviour
         switch (state) 
         {
             case GameState.GAMEPLAY:
+                //Activate Inventory Canvas
                 hasChangedState = true;
                 state = GameState.INVENTORY;
                 inventory_screen.SetActive(true);
+                //Activates the buttons based on the items in the inventory.
                 inventory_screen.GetComponent<SortingInventory>().activate_buttons(player_inventory.GetComponent<Inventory>().getList());
+                //Activates cursor for clicking the buttons
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 break;
@@ -62,25 +65,30 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.GAMEPLAY:
+                //Activates Pause Canvas
                     hasChangedState = true;
                     state = GameState.PAUSE;
                     pause_screen.SetActive(true);
-                    Cursor.lockState = CursorLockMode.None;
+                //Unlocks mouse
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 break;
             case GameState.PAUSE:
+                //Deactivates Pause Canvas
                     hasChangedState = true;
                     state = GameState.GAMEPLAY;
                     pause_screen.SetActive(false);
-                    Cursor.lockState = CursorLockMode.Locked;
+                //Locks Cursor
+                Cursor.visible = false ;
+                Cursor.lockState = CursorLockMode.Locked;
                 break;
             case GameState.INVENTORY:
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
+                //Deactivates Inventory Canvas
                     hasChangedState = true;
                     state = GameState.GAMEPLAY;
                     inventory_screen.SetActive(false);
+                    Cursor.visible = false;
                     Cursor.lockState = CursorLockMode.Locked;
-                }
                 break;
         }
 
