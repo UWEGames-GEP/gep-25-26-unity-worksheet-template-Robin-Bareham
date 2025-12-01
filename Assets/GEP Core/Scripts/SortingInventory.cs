@@ -8,8 +8,8 @@ public class SortingInventory : MonoBehaviour
 {
    // public GameManager gameManager;
 
-    public List<GameObject> buttons_list = new List<GameObject>(); //List of all the buttons in the inventory
-    public List<GameObject> panel_list = new List<GameObject>(); //List of all the avalible panels for items to into
+    private List<GameObject> buttons_list = new List<GameObject>(); //List of all the buttons in the inventory
+    private List<GameObject> panel_list = new List<GameObject>(); //List of all the avalible panels for items to into
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
