@@ -56,7 +56,14 @@ public class GameManager : MonoBehaviour
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 break;
-
+            case GameState.INVENTORY:
+                //Deactivates Inventory Canvas
+                hasChangedState = true;
+                state = GameState.GAMEPLAY;
+                inventory_screen.SetActive(false);
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                break;
         }
     }
     public void pauseInput()

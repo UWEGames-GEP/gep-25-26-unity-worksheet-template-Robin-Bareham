@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerCharControler : ThirdPersonController
 {
-
-
     private void OnPause(InputValue value)
     {
         if (value.isPressed)

@@ -6,12 +6,15 @@ using UnityEngine.UI;
 
 public class SortingInventory : MonoBehaviour
 {
-    private List<GameObject> buttons_list = new List<GameObject>(); //List of all the buttons in the inventory
-    private List<GameObject> panel_list = new List<GameObject>(); //List of all the avalible panels for items to into
+   // public GameManager gameManager;
+
+    public List<GameObject> buttons_list = new List<GameObject>(); //List of all the buttons in the inventory
+    public List<GameObject> panel_list = new List<GameObject>(); //List of all the avalible panels for items to into
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        //gameManager = FindAnyObjectByType<GameManager>();
         //Fills lists with the items depending on their tag
         GameObject[] btn = GameObject.FindGameObjectsWithTag("invBtn");
         GameObject[] pannel_temp = GameObject.FindGameObjectsWithTag("pannel");
@@ -29,10 +32,15 @@ public class SortingInventory : MonoBehaviour
 
     public void activate_buttons(List<string> collected_list) 
     {
+        //Debug.Log("INSIDE ACTIVATE BUTTON");
+        //Debug.Log(collected_list.Count);
+        //Debug.Log(buttons_list.Count);
+        //Debug.Log(panel_list.Count);
         //Sets all the buttons to false, invisible.
         for (int i = 0; i < buttons_list.Count; i++)
         {
           buttons_list[i].SetActive(false);
+            //Debug.Log("INSIDE SET ACTIVE!!!!!!!!!!!!!!!!!!!!!!!!!!");
         }
         //Goes through all avalible buttons
         for (int i = 0; i < buttons_list.Count; i++) 
@@ -52,23 +60,26 @@ public class SortingInventory : MonoBehaviour
                     buttons_list[i].SetActive(true);
                     already_activated = true; //Avoids hiding it when going through the rest of the list.
                     object_count++;
-                    
+                    //Debug.Log(buttons_list[i] + " SETTING TRUE " + j);
                 }
                 //If there is no instance of the button and it hasn't been set to active in a different part.
                 else if (!already_activated)
                 {
                     buttons_list[i].SetActive(false);
+                    //Debug.Log(buttons_list[i] + " SETTING FALSE" + j);
                 }
             }
             //Updates the amount of the object's text.
             buttons_list[i].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = object_count.ToString();
+            //Debug.Log(buttons_list.Count + "End Of activating");
+            //Debug.Log(panel_list.Count);
         }
         sortBtnList(); 
     }
 
     private void sortBtnList() 
     {
-
+        //Debug.Log("Inside SORTING LIST");
         //Reset first button position to match first panel.
         int current_panel = 0;
         int max_panels = panel_list.Count;
@@ -86,6 +97,8 @@ public class SortingInventory : MonoBehaviour
                 current_panel++;
             }
         }
+        //Debug.Log(buttons_list.Count + "End of Sorting");
+        //Debug.Log(panel_list.Count);
 
     }
 

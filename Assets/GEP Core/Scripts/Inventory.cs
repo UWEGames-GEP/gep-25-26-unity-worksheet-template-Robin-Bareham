@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEngine.EventSystems;
 
-public class Inventory : MonoBehaviour
+public class Inventory : SortingInventory //MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameManager gameManager;
@@ -21,12 +21,6 @@ public class Inventory : MonoBehaviour
         gameManager = FindAnyObjectByType<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void addItem(string item_name)
     {
         items.Add(item_name);
@@ -36,10 +30,10 @@ public class Inventory : MonoBehaviour
     {
         //Gets Item location in the list
         int item_location = getItemLocation(item_name);
-        //Sets the in-game equivilant to active and removes from gameObejctList
-        game_objects_list[item_location].gameObject.SetActive(true);
         //SET GAMEOBJECT LOCATION IN FRONT OF PLAYER
         relocateItem(game_objects_list[item_location]);
+        //Sets the in-game equivilant to active and removes from gameObejctList
+        game_objects_list[item_location].gameObject.SetActive(true);
         // Removes object as collected
         game_objects_list.Remove(game_objects_list[item_location]);
         //Adjust count attached to button to corrolate to the amound of items in the inventory list
@@ -47,7 +41,11 @@ public class Inventory : MonoBehaviour
         //Removes item from inventory list
         items.Remove(item_name);
         //resorts buttons and deactivates the one clicked.
+        Debug.Log(items + " " + item_name + " REMOVING ITEM");
         sorting_inventory_script.GetComponent<SortingInventory>().activate_buttons(items);
+        //activate_buttons(items);
+        //Debug.Log(buttons_list.Count + "After Remove item");
+        //Debug.Log(panel_list.Count);
     }
 
    public void relocateItem(GameObject item) 
@@ -55,12 +53,12 @@ public class Inventory : MonoBehaviour
         Vector3 currentPos = transform.position;
         Vector3 forward = transform.forward;
 
-        Debug.Log("POS: " + currentPos);
-        Debug.Log("FORWARD: " + forward);
+        //Debug.Log("POS: " + currentPos);
+        //Debug.Log("FORWARD: " + forward);
 
         Vector3 newPos = currentPos + (forward*2);
         newPos += new Vector3(0, 1, 0);
-        Debug.Log("NewPOS: " + newPos);
+        //Debug.Log("NewPOS: " + newPos);
 
         Quaternion currentRotation = transform.rotation;
         Quaternion newRotation = currentRotation * Quaternion.Euler(0, 0, 180);
