@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public enum GameState { GAMEPLAY,PAUSE,INVENTORY}
     private GameState state = GameState.GAMEPLAY;
     private bool hasChangedState = false;
+    private int items_dropped = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
                 inventory_screen.SetActive(false);
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
+                items_dropped = 0;
                 break;
         }
     }
@@ -96,8 +98,19 @@ public class GameManager : MonoBehaviour
                     inventory_screen.SetActive(false);
                     Cursor.visible = false;
                     Cursor.lockState = CursorLockMode.Locked;
+                    items_dropped = 0;
                 break;
         }
 
+    }
+
+    public void increase_dropped_no() 
+    {
+        items_dropped++;
+    }
+
+    public int get_dropped_no() 
+    {
+        return items_dropped;
     }
 }

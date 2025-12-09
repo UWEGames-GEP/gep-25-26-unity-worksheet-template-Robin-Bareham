@@ -14,7 +14,11 @@ public class Inventory : SortingInventory //MonoBehaviour
     private List<string> items = new List<string>();
     //List of items that are avalible in the overworld.
     private List<GameObject> game_objects_list = new List<GameObject>();
-    
+    private int drops_in_one_go = 3;
+    private int[,] dropoff_location = new int[9,2] { 
+        {0,0 },{ 1, 0 },{ 0, 1}, 
+        { 1,1 }, { -1, 0 }, { 0, -1 }, 
+        { -1, -1 }, { 2, 1 }, { 1, 2 } };
 
     void Start()
     {
@@ -28,6 +32,8 @@ public class Inventory : SortingInventory //MonoBehaviour
 
     public void removeItem(string item_name)
     {
+        Debug.Log(gameManager.get_dropped_no());
+        //if(drops_in_one_go > gameManager.get_dropped_no()) { 
         //Gets Item location in the list
         int item_location = getItemLocation(item_name);
         //SET GAMEOBJECT LOCATION IN FRONT OF PLAYER
@@ -43,12 +49,13 @@ public class Inventory : SortingInventory //MonoBehaviour
         //resorts buttons and deactivates the one clicked.
         Debug.Log(items + " " + item_name + " REMOVING ITEM");
         sorting_inventory_script.GetComponent<SortingInventory>().activate_buttons(items);
+        //}
         //activate_buttons(items);
         //Debug.Log(buttons_list.Count + "After Remove item");
         //Debug.Log(panel_list.Count);
     }
 
-   public void relocateItem(GameObject item) 
+    public void relocateItem(GameObject item)
     {
         Vector3 currentPos = transform.position;
         Vector3 forward = transform.forward;
@@ -56,8 +63,14 @@ public class Inventory : SortingInventory //MonoBehaviour
         //Debug.Log("POS: " + currentPos);
         //Debug.Log("FORWARD: " + forward);
 
-        Vector3 newPos = currentPos + (forward*2);
-        newPos += new Vector3(0, 1, 0);
+        //Vector3 newPos = currentPos + (forward * 2);
+        //newPos += new Vector3(dropoff_location[gameManager.get_dropped_no(),0], 1, dropoff_location[gameManager.get_dropped_no(),1]);
+
+        Vector3 newPos = currentPos + new Vector3(dropoff_location[gameManager.get_dropped_no(), 0], 1, dropoff_location[gameManager.get_dropped_no(), 1]); ;
+        newPos += (forward * 3);
+
+
+
         //Debug.Log("NewPOS: " + newPos);
 
         Quaternion currentRotation = transform.rotation;
@@ -65,6 +78,7 @@ public class Inventory : SortingInventory //MonoBehaviour
 
         //item.transform.rotation = currentRotation;
         item.transform.position = newPos;
+        gameManager.increase_dropped_no();
     }
 
     public List<string> getList() { return items; }
