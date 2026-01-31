@@ -6,10 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public GameObject pause_screen;
     public GameObject inventory_screen;
-    public GameObject player_inventory;
+    public GameObject items_container;
     public enum GameState { GAMEPLAY,PAUSE,INVENTORY}
     private GameState state = GameState.GAMEPLAY;
     private bool hasChangedState = false;
+    private bool first_inventory_open = false;
     private int items_dropped = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -51,8 +52,14 @@ public class GameManager : MonoBehaviour
                 hasChangedState = true;
                 state = GameState.INVENTORY;
                 inventory_screen.SetActive(true);
+                //If it's the first time the inventory has been activated, it gets the amount of buttons and pannels it has for sorting to work.
+                if (!first_inventory_open)
+                {
+                    items_container.GetComponent<Inventory>().logAllBtns();
+                    first_inventory_open =true;
+                }
                 //Activates the buttons based on the items in the inventory.
-                inventory_screen.GetComponent<SortingInventory>().activate_buttons(player_inventory.GetComponent<Inventory>().getList());
+                items_container.GetComponent<Inventory>().activate_buttons(items_container.GetComponent<Inventory>().getItemList());
                 //Activates cursor for clicking the buttons
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
