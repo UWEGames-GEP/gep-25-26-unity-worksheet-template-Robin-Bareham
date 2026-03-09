@@ -2,32 +2,18 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public Texture2D item_icon;
-    public BoxCollider box_collider;
-    public GameObject item_prefab;
-
+    public Sprite item_icon;
     private bool active_in_inventory = false;
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Ack!");
-        if (!active_in_inventory) 
-        {
-            item_prefab.SetActive(false);
-        }
-    }
-
-    public void set_active(bool active) 
+    public void setInventoryActive(bool active) 
     {
         active_in_inventory = active;
     }
-
-    public bool get_active() 
+    public bool getInventoryActive()
     {
         return active_in_inventory;
     }
-
-    public Texture2D get_icon() 
+    public Sprite get2DIcon() 
     {
         return item_icon;
     }

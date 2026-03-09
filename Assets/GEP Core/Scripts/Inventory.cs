@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Inventory : Items //MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
+    
     private List<GameObject> buttons_list = new List<GameObject>(); //List of all the buttons in the inventory
     private List<GameObject> panel_list = new List<GameObject>(); //List of all the avalible panels for items to into
 
@@ -106,6 +106,6 @@ public class Inventory : Items //MonoBehaviour
             Debug.Log("YOU@VE COLLECTED SOMETHING");
             Debug.Log(getItemList().Count);
         }
-    }
+    } 
 
 }

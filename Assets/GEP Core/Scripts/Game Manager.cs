@@ -55,11 +55,11 @@ public class GameManager : MonoBehaviour
                 //If it's the first time the inventory has been activated, it gets the amount of buttons and pannels it has for sorting to work.
                 if (!first_inventory_open)
                 {
-                    items_container.GetComponent<Inventory>().logAllBtns();
-                    first_inventory_open =true;
+                    items_container.GetComponent<InventoryManagement>().loadLists();
+                    first_inventory_open = true;
                 }
                 //Activates the buttons based on the items in the inventory.
-                items_container.GetComponent<Inventory>().activate_buttons(items_container.GetComponent<Inventory>().getItemList());
+                items_container.GetComponent<InventoryManagement>().sortBtnList(); //items_container.GetComponent<InventoryManagement>(). getItemList()); 
                 //Activates cursor for clicking the buttons
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
