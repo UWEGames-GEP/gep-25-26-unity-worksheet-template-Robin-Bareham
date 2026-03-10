@@ -10,10 +10,10 @@ public class ItemCollection : MonoBehaviour
         if (hit.transform.CompareTag("Collectable") && hit.gameObject.activeSelf == true)
         {
             hit.gameObject.GetComponent<Item>().setInventoryActive(true);
-            hit.gameObject.GetComponent<Item>().get2DIcon();
+            //hit.gameObject.GetComponent<Item>().get2DIcon();
             hit.gameObject.SetActive(false);
 
-            inventory_manager.GetComponent<InventoryManagement>().addItemToInventory(hit.gameObject.GetComponent<Item>().get2DIcon());
+            inventory_manager.GetComponent<InventoryManagement>().addItemToInventory(hit.gameObject);
             //Debug.Log("YOU'VE COLLECTED SOMETHING");
             //Debug.Log(getItemList().Count);
         }

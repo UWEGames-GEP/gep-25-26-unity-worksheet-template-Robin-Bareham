@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item_icon: {fileID: 5921690456534884042, guid: d8d32f7ff3754d245a59704bbca76b4f, type: 3}
+  item_name: Watermelon

@@ -3,6 +3,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public Sprite item_icon;
+    public string item_name;
     private bool active_in_inventory = false;
 
     public void setInventoryActive(bool active) 
@@ -17,4 +18,5 @@ public class Item : MonoBehaviour
     {
         return item_icon;
     }
+    public string getItemName() { return item_name; }
 }

@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item_icon: {fileID: 126692058012832377, guid: 2c84b01df5dec784cb4768cf983c5117, type: 3}
+  item_name: Peach

@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item_icon: {fileID: 8495642495149920525, guid: 811236facf011b0499810537520c3ad1, type: 3}
+  item_name: Banana

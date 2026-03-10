@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item_icon: {fileID: -7247400609401495874, guid: 4421f6c6db9af8b4eb615398cb471fa9, type: 3}
+  item_name: Avocado

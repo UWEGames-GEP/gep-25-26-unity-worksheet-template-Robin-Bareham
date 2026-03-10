@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item_icon: {fileID: -6725965872243440687, guid: 7269a4c316943c846a35a4c939d94a8c, type: 3}
+  item_name: Strawberry
