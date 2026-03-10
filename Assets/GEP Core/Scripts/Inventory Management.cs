@@ -16,7 +16,7 @@ public class InventoryManagement : MonoBehaviour
     [SerializeField]
     private List<GameObject> object_list = new List<GameObject>();
     [SerializeField]
-    private List<string> icon_list = new List<string>();
+    //private List<string> icon_list = new List<string>();
 
     public void loadLists() 
     {
@@ -37,40 +37,21 @@ public class InventoryManagement : MonoBehaviour
         //icon_list.Add(item_icon.GetComponent<Item>().getItemName());
     }
 
-    public void removeItemFromInventory(GameObject p_object)
+    public void removeItemFromInventory(GameObject button_clicked)
     {
-        ////Finds button it's representing, decreases count.
-        //for(int i=0; i<buttons_list.Count; i++) 
-        //{
-        //    if (buttons_list[i].activeInHierarchy == true)
-        //    {
-        //        if (buttons_list[i].GetComponent<Image>().sprite == p_object.GetComponent<Item>().get2DIcon())
-        //        {
-        //            int temp_num = int.Parse(buttons_list[i].GetComponentInChildren<TMPro.TextMeshProUGUI>().text);
-        //            temp_num -= 1;
-        //            buttons_list[i].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = temp_num.ToString();
+        //Find which object it's referring to and decrease count for button.
+        for (int i = 0; i < object_list.Count; i++)
+        {
+            if (object_list[i].GetComponent<Item>().getItemName() == button_clicked.GetComponentInChildren<PanelInfo>().getName()) 
+            {
+                object_list[i].SetActive(true);
+                object_list.RemoveAt(i);
+            }
+        }
 
-        //        }
-        //    }
-        //}
-        ////removes icon from list
-        //for (int i = 0; i < icon_list.Count; i++)
-        //{
-        //    if (icon_list[i] == item_icon)
-        //    {
-        //        icon_list.Remove(icon_list[i]);
-        //    }
-        //}
-        ////Finds icon's item
-        //for (int i = 0; i < object_list.Count; i++)
-        //{
-        //    if (object_list[i].GetComponent<Item>().getInventoryActive() == true && object_list[i].GetComponent<Item>().get2DIcon() == item_icon)
-        //    {
-        //        object_list[i].SetActive(true);
-        //        object_list[i].GetComponent<Item>().setInventoryActive(false);
-        //    }
-        //}
-        //sortBtnList();
+            //Make that object visible and remove from object list
+
+            sortBtnList();
 
     }
 
@@ -98,6 +79,7 @@ public class InventoryManagement : MonoBehaviour
                     {
                         int temp_num = int.Parse(buttons_list[i].GetComponentInChildren<TMPro.TextMeshProUGUI>().text);
                         temp_num += 1;
+                        buttons_list[j].GetComponentInChildren<PanelInfo>().setCount(temp_num);
                         buttons_list[j].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = temp_num.ToString();
                         break;
                     }
@@ -107,6 +89,8 @@ public class InventoryManagement : MonoBehaviour
                 {
                     buttons_list[j].GetComponent<Image>().sprite = object_list[i].GetComponent<Item>().get2DIcon();
                     buttons_list[j].GetComponentInChildren<PanelInfo>().setName(object_list[i].GetComponent<Item>().getItemName());
+                    buttons_list[j].GetComponentInChildren<PanelInfo>().setCount(1);
+                    buttons_list[j].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "1";
                     buttons_list[j].SetActive(true);
                     break;
                 }
