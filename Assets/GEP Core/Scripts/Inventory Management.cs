@@ -10,13 +10,12 @@ public class InventoryManagement : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    [SerializeField]
+    public GameObject player_object;
 
+    [SerializeField]
     private List<GameObject> buttons_list = new List<GameObject>();
     [SerializeField]
     private List<GameObject> object_list = new List<GameObject>();
-    [SerializeField]
-    //private List<string> icon_list = new List<string>();
 
     public void loadLists() 
     {
@@ -32,9 +31,7 @@ public class InventoryManagement : MonoBehaviour
 
     public void addItemToInventory(GameObject item_icon)
     {
-        //Adds physical object to list and get the name assiosiated with it.
         object_list.Add(item_icon);
-        //icon_list.Add(item_icon.GetComponent<Item>().getItemName());
     }
 
     public void removeItemFromInventory(GameObject button_clicked)
@@ -44,6 +41,19 @@ public class InventoryManagement : MonoBehaviour
         {
             if (object_list[i].GetComponent<Item>().getItemName() == button_clicked.GetComponentInChildren<PanelInfo>().getName()) 
             {
+
+                //Debug.Log(player_object.transform.position + " " + object_list[i].transform.position);
+                //Debug.Log(player_object.transform.forward.x + " " + player_object.transform.forward.z);
+                //Debug.Log(Random.Range(-3f, 3f));
+
+                //Change the location of the item being dropped to in front of where player is looking
+                Vector3 position;
+                position.x = (player_object.transform.position.x + 3 * player_object.transform.forward.x) + Random.Range(-2f, 2f);
+                position.y = object_list[i].transform.position.y;
+                position.z = (player_object.transform.position.z + 3 * player_object.transform.forward.z) + Random.Range(-2f, 2f);
+
+                object_list[i].transform.position = position;
+
                 object_list[i].SetActive(true);
                 object_list.RemoveAt(i);
             }
@@ -62,16 +72,18 @@ public class InventoryManagement : MonoBehaviour
         for(int i = 0;i < buttons_list.Count; i++) 
         {
             buttons_list[i].SetActive(false);
+            buttons_list[i].GetComponentInChildren<PanelInfo>().setCount(1);
+            buttons_list[i].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "1";
         }
         //Goes through all the objects collected
         for(int i = 0; i < object_list.Count; i++) 
         {
             //Goes through all the buttons
-            Debug.Log(object_list[i].GetComponent<Item>().getItemName());
+            //Debug.Log(object_list[i].GetComponent<Item>().getItemName());
             for (int j = 0; j < buttons_list.Count; j++)
             {
-                Debug.Log("Button: " + j);
-                Debug.Log("Button Name: " + buttons_list[j].GetComponentInChildren<PanelInfo>().getName() + " Item Name: " + object_list[i].GetComponent<Item>().getItemName());
+                //Debug.Log("Button: " + j);
+                //Debug.Log("Button Name: " + buttons_list[j].GetComponentInChildren<PanelInfo>().getName() + " Item Name: " + object_list[i].GetComponent<Item>().getItemName());
                 //If the button is active
                 if (buttons_list[j].activeInHierarchy == true)
                 {
@@ -99,10 +111,10 @@ public class InventoryManagement : MonoBehaviour
 
     }
 
-    public void addObjectToList(GameObject temp_obj)
-    {
-        object_list.Add(temp_obj);
-    }
+    //public void addObjectToList(GameObject temp_obj)
+    //{
+    //    object_list.Add(temp_obj);
+    //}
 
 }
 
