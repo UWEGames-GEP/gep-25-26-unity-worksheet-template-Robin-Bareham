@@ -6229,7 +6229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42658c64e48794d42a680af9a328b2f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1196567613}
+  player_object: {fileID: 1196567613}
   buttons_list: []
   object_list: []
 --- !u!4 &1026266393 stripped
