@@ -67,8 +67,7 @@ public class InventoryManagement : MonoBehaviour
 
     public void sortBtnList() 
     {
-        //Debug.Log(buttons_list.Count);
-        //Debug.Log(object_list.Count);
+        //Goes through and hides all the buttons.
         for(int i = 0;i < buttons_list.Count; i++) 
         {
             buttons_list[i].SetActive(false);
@@ -79,14 +78,12 @@ public class InventoryManagement : MonoBehaviour
         for(int i = 0; i < object_list.Count; i++) 
         {
             //Goes through all the buttons
-            //Debug.Log(object_list[i].GetComponent<Item>().getItemName());
             for (int j = 0; j < buttons_list.Count; j++)
             {
-                //Debug.Log("Button: " + j);
-                //Debug.Log("Button Name: " + buttons_list[j].GetComponentInChildren<PanelInfo>().getName() + " Item Name: " + object_list[i].GetComponent<Item>().getItemName());
                 //If the button is active
                 if (buttons_list[j].activeInHierarchy == true)
                 {
+                    //If the button contains the same object as the current one.
                     if (buttons_list[j].GetComponentInChildren<PanelInfo>().getName() == object_list[i].GetComponent<Item>().getItemName())
                     {
                         int temp_num = int.Parse(buttons_list[i].GetComponentInChildren<TMPro.TextMeshProUGUI>().text);
@@ -96,7 +93,7 @@ public class InventoryManagement : MonoBehaviour
                         break;
                     }
                 }
-                //If it's not active add object's Icon to the texture.
+                //If it's not active add object's Icon to the texture and edit count.
                 else
                 {
                     buttons_list[j].GetComponent<Image>().sprite = object_list[i].GetComponent<Item>().get2DIcon();
@@ -110,11 +107,5 @@ public class InventoryManagement : MonoBehaviour
         }
 
     }
-
-    //public void addObjectToList(GameObject temp_obj)
-    //{
-    //    object_list.Add(temp_obj);
-    //}
-
 }
 
